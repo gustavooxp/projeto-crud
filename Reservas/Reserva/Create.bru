@@ -1,0 +1,27 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/reservas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "motivo": "Reunião para melhoria de sistema de agendamentos",
+    "nome": "Gustavo Miranda",
+    "dataInicio": "31/10/2025 13:30",
+    "dataFim": "31/10/2025 15:30",
+    "ambiente": {
+    "id": 2
+  }
+  }
+}
+
+settings {
+  encodeUrl: true
+}
