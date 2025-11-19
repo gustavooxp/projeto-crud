@@ -32,4 +32,5 @@ public class AmbienteController extends BaseController<AmbienteDTO>{
     public List<AmbienteDTO> getReservasPorRecursos(@PathVariable("recursoId") Long recursoId) {
         return ((AmbienteService) service).listaPorRecurso(recursoId);
     }
+    
 }
