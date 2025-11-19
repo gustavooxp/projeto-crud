@@ -1,43 +1,40 @@
 package com.example.projeto.crud.Entity;
 
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
-
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "ambiente")
 @EqualsAndHashCode(callSuper = false)
-public class Ambiente extends BaseEntity {
+@Getter
+@Setter
+@Table(name = "recursos")
+@Entity
+public class Recursos extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; 
+
+    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
-    private String descricao;
-
-    @Column(nullable = false)
-    private String localizacao;
-
-    @Column(nullable = false)
-    private int capacidade = 1;
-
     @ManyToMany
-    List <Recursos> recursos;
-
-   
+    List <Ambiente> ambiente;
 }

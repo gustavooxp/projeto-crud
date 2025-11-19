@@ -1,0 +1,15 @@
+meta {
+  name: Tela com calendario semana, exibindo as reservas
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://localhost:8080/reservas/relatorio-semanal
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

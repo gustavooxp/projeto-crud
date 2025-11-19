@@ -12,9 +12,11 @@ import com.example.projeto.crud.Entity.Reserva;
 import com.example.projeto.crud.Repository.AmbienteRepository;
 import com.example.projeto.crud.Repository.ReservaRepository;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +53,6 @@ public class ReservaService extends BaseService<Reserva, ReservaDTO> {
             throw new IllegalStateException("O ambiente não está disponível nesse intervalo de tempo.");
         }
 
-        reserva = reservaRepository.save(reserva);
         return super.create(dto);
     }
 
@@ -93,8 +94,34 @@ public class ReservaService extends BaseService<Reserva, ReservaDTO> {
         return dtos;
     }
 
-    public List<Reserva> findReservasPorNomeUsuario(String nomeUsuario) {
-        return reservaRepository.findReservasPorNomeUsuario(nomeUsuario);
+    public List<ReservaDTO> findReservasPorNomeUsuario(String nomeUsuario) {
+        List<Reserva> reservas = reservaRepository.findByUsuario(nomeUsuario);
+
+        List<ReservaDTO> dtos = new ArrayList<>();
+
+        for (Reserva reserva : reservas) {
+            dtos.add(super.toDto(reserva));
+        }
+        return dtos;
+    }
+
+    public List<ReservaDTO> gerarRelatorioSemanal() {
+
+        LocalDate agora = LocalDate.now();
+
+        LocalDateTime inicioDaSeamana = agora.with(DayOfWeek.MONDAY).atStartOfDay();
+        LocalDateTime fimDaSemana = inicioDaSeamana.plusDays(6)
+        .withHour(23)
+        .withMinute(59)
+        .withSecond(59);
+
+        List<Reserva> reservas = reservaRepository.findByDatas(inicioDaSeamana, fimDaSemana);
+
+        List<ReservaDTO> dtos = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            dtos.add(super.toDto(reserva));
+        }
+        return dtos;
     }
 
 }

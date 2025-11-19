@@ -1,5 +1,8 @@
 package com.example.projeto.crud.DTO;
 
+import java.util.List;
+
+import com.example.projeto.crud.Entity.Recursos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -28,5 +31,7 @@ public class AmbienteDTO {
 
     @NotNull(message = "A capacidade não pode ser nula")
     private int capacidade; 
+
+    List <Recursos> recursos;
 
 }

@@ -40,7 +40,7 @@ public class ReservaDTO {
     private Ambiente ambiente;
 
     @AssertTrue(message = "A data de início deve ser anterior à data de fim")
-    public boolean periodoValido() {
+    public boolean isPeriodoValido() {
         return dataInicio.isBefore(dataFim);
     }
 

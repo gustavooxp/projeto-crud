@@ -1,5 +1,6 @@
 package com.example.projeto.crud.Controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,8 @@ public class ReservaController extends BaseController<ReservaDTO> {
     @GetMapping("/porData/{dataInicio}/{dataFim}")
     public List<ReservaDTO> getReservasPorData(
             @PathVariable("dataInicio") String dataInicio,
-            @PathVariable("dataFim") String dataFim
-            ) {
-                return service.listaPorData(dataInicio, dataFim);
+            @PathVariable("dataFim") String dataFim) {
+        return service.listaPorData(dataInicio, dataFim);
     }
 
     @GetMapping("/porAmbiente/{ambienteId}")
@@ -38,15 +38,14 @@ public class ReservaController extends BaseController<ReservaDTO> {
         return service.listaPorAmbiente(ambienteId);
     }
 
-    @GetMapping("/porUsuario/{nomeUsuario}")
-    public List<ReservaDTO> getReservasPorUsuario(@PathVariable String nomeUsuario) {
-        List<Reserva> reservas = service.findReservasPorNomeUsuario(nomeUsuario);
-        List<ReservaDTO> reservaDTOs = new ArrayList<>();
+    @GetMapping("/porUsuario/{usuario}")
+    public List<ReservaDTO> getReservasPorUsuario(@PathVariable("usuario") String usuario) {
+        return service.findReservasPorNomeUsuario(usuario);
+    }
 
-        for (Reserva reserva : reservas) {
-            reservaDTOs.add(service.toDto(reserva));
-        }
-        return reservaDTOs;
+    @GetMapping("/relatorio-semanal")
+    public List<ReservaDTO> relatorioSemanal() {
+        return service.gerarRelatorioSemanal();
     }
 
 }

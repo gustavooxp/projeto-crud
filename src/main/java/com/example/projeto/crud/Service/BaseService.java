@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.example.projeto.crud.DTO.AmbienteDTO;
+import com.example.projeto.crud.Entity.Ambiente;
 import com.example.projeto.crud.Entity.BaseEntity;
 import com.example.projeto.crud.Entity.Reserva;
 import com.example.projeto.crud.Repository.BaseRepository;
@@ -31,9 +33,9 @@ public abstract class BaseService<E extends BaseEntity, D> {
 
 
     public D toDto(E e) {
-            try {
-                D dto = dtoClass.getDeclaredConstructor().newInstance();
-                BeanUtils.copyProperties(e, dto);
+                try {
+                    D dto = dtoClass.getDeclaredConstructor().newInstance();
+                    BeanUtils.copyProperties(e, dto);
 
             return dto;
         } catch (Exception ex) {
@@ -87,4 +89,7 @@ public abstract class BaseService<E extends BaseEntity, D> {
         }
         return dtos;
     }
+
+
+
 }

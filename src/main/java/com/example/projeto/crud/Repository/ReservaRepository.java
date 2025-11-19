@@ -27,14 +27,15 @@ public interface ReservaRepository extends BaseRepository<Reserva, Long> {
         List<Reserva> findByDatas(LocalDateTime dataInicio, LocalDateTime dataFLocalDateTime);
 
         @Query("""
-                SELECT r
-                FROM Reserva r
-                WHERE r.ativo = true
-                AND r.ambiente.id = :ambienteId
-                """)
+                        SELECT r
+                        FROM Reserva r
+                        WHERE r.ativo = true
+                        AND r.ambiente.id = :ambienteId
+                        """)
         List<Reserva> findByAmbiente(Long ambienteId);
 
         @Query("SELECT r FROM Reserva r WHERE r.nome = :nomeUsuario")
-        List<Reserva> findReservasPorNomeUsuario(@Param("nomeUsuario") String nomeUsuario);
+        List<Reserva> findByUsuario(String nomeUsuario);
 
+                 
 }

@@ -18,7 +18,7 @@ import lombok.Getter;
 @Data
 @MappedSuperclass
 @Getter
-@EntityListeners(AuditingEntityListener.class)
+    @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
     @Id

@@ -1,0 +1,21 @@
+meta {
+  name: Criar recurso
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/recursos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Desktop"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
